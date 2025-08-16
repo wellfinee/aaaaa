@@ -102,6 +102,7 @@ export default [
       key: 'koa.sess',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      secureProxy: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       domain: 'hidezoneofficial.com',
       maxAge: 24 * 60 * 60 * 1000,

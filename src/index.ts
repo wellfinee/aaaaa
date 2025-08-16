@@ -139,7 +139,7 @@ export default {
           ctx.cookies.set('jwt', jwt, {
             domain: "hidezoneofficial.onrender.com", // домен API
             httpOnly: true,
-            secure: true,      // обязателен с SameSite=None
+            secure: process.env.NODE_ENV === 'production', // обязателен с SameSite=None в проде
             sameSite: 'None',  // разные origin → нужна None
             maxAge: 24 * 60 * 60 * 1000,
             // domain и path НЕ указываем — кука принадлежит onrender-домену
@@ -518,7 +518,7 @@ export default {
       const cookieOptions = {
         domain: "hidezoneofficial.onrender.com",
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
         sameSite: 'None',
         maxAge: 0,
       };
