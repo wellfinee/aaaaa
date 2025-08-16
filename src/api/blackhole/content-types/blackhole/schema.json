@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blackholes",
+  "info": {
+    "singularName": "blackhole",
+    "pluralName": "blackholes",
+    "displayName": "blackhole"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "allocated": {
+      "type": "boolean"
+    },
+    "drawTime": {
+      "type": "datetime",
+      "required": true
+    },
+    "participants": {
+      "type": "json"
+    },
+    "winnerId": {
+      "type": "string"
+    }
+  }
+}

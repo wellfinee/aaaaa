@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "User"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "steamId": {
+      "type": "string",
+      "unique": true,
+      "configurable": false
+    },
+    "personaName": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    },
+    "steamLevel": {
+      "type": "integer"
+    },
+    "inWishlist": {
+      "type": "boolean"
+    },
+    "lastSpinAt": {
+      "type": "datetime"
+    }
+  }
+}

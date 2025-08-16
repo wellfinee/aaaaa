@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "game_keys",
+  "info": {
+    "singularName": "game-key",
+    "pluralName": "game-keys",
+    "displayName": "game-key"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "keyValue": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "allocated": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "steamId": {
+      "type": "string"
+    }
+  }
+}

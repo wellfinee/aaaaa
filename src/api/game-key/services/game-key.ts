@@ -1,0 +1,7 @@
+/**
+ * game-key service
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreService('api::game-key.game-key');
