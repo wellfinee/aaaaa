@@ -17,7 +17,6 @@ exports.default = {
         // Ключи для подписи куки-сессий
         // Инициализируем Passport
         app.use(koa_passport_1.default.initialize());
-        app.use(koa_passport_1.default.session());
     },
     /**
      * В bootstrap-фазе настраиваем стратегию,
@@ -110,19 +109,19 @@ exports.default = {
             strapi.log.info(`   JWT issued for user ID=${user.id}`);
             // Поставить куку
             ctx.cookies.set('jwt', jwt, {
-                domain: 'hidezoneofficial.com',
-                path: '/api',
+                domain: "hidezoneofficial.onrender.com",
                 httpOnly: true,
-                secure: false,
-                sameSite: 'Lax',
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'None',
                 maxAge: 24 * 60 * 60 * 1000,
             });
             strapi.log.info('   Cookie "jwt" set');
-            // Редирект на фронтенд
-            ctx.redirect(process.env.APP_URL);
+            // Редирект на фронт
+            const redirectUrl = 'https://hidezoneofficial.com/';
+            ctx.redirect(redirectUrl);
         });
-        const MAIL_UID = 'api::mail.mail'; // TODO: замените на свой UID коллекции
-        // PATCH /api/mails/:id/mark-old
+        const MAIL_UID = 'api::mail.mail'; // заменишь на свой UID при необходимости
+        // ---------- PATCH /api/mails/:id/mark-old ----------
         router.patch('/api/mails/:id/mark-old', async (ctx) => {
             // 1) Проверяем JWT из куки
             const token = ctx.cookies.get('jwt');
@@ -354,23 +353,17 @@ exports.default = {
         });
         router.get('/api/auth/logout', async (ctx) => {
             strapi.log.info('→ GET /api/auth/logout');
-            // 1) Стираем jwt-куку на корне и на /api
             const cookieOptions = {
-                domain: 'hidezoneofficial.com',
+                domain: "hidezoneofficial.onrender.com",
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Lax',
+                sameSite: 'None',
                 maxAge: 0,
             };
-            // удаляем на корневом пути
             ctx.cookies.set('jwt', null, { ...cookieOptions, path: '/' });
-            strapi.log.info('   jwt cookie cleared on path=/');
-            // удаляем на пути /api
             ctx.cookies.set('jwt', null, { ...cookieOptions, path: '/api' });
-            strapi.log.info('   jwt cookie cleared on path=/api');
-            // 2) Возвращаем клиенту 200 OK
-            ctx.body = { ok: true };
-            ctx.redirect(process.env.APP_URL);
+            strapi.log.info('   jwt cookie cleared');
+            ctx.redirect('https://hidezoneofficial.com/');
         });
         router.post('/api/blackhole/register', async (ctx) => {
             // 1) Auth
